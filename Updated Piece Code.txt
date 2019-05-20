@@ -1,3 +1,4 @@
+
 public class Piece {
 	private String pieceType;
 	private String pieceColour;
@@ -237,10 +238,10 @@ public class Piece {
 			while (b != 7) {
 				if (move(a, b) == true) {
 					array[a][b] = true;
-					System.out.println("True: " + a + " " + b);
+					//System.out.println("True: " + a + " " + b);
 				} else {
 					array[a][b] = false;
-					System.out.println("False: " + a + " " + b);
+					//System.out.println("False: " + a + " " + b);
 				}
 				b += 1;
 			}
