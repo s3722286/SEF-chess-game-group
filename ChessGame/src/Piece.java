@@ -108,17 +108,14 @@ public class Piece {
 			while (b != 7) {
 				if (validateMove(a, b)) {
 					array[a][b] = true;
-					//System.out.println("True: " + a + " " + b);
 				} else {
 					array[a][b] = false;
-					//System.out.println("False: " + a + " " + b);
 				}
 				b += 1;
 			}
 			b = 1;
 			a += 1;
 		}
-		// System.out.println("PIECE FINISHED");
 	}
 
 	public boolean validMove(int x, int y) {

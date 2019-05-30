@@ -59,7 +59,6 @@ public class Board implements MouseListener{
 				}
 
 			}
-		//F.pack();
 		
 		
 		SwingUtilities.invokeLater(new Runnable()
@@ -186,9 +185,7 @@ public class Board implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// ((JComponent) e.getSource()).setBackground(java.awt.Color.BLUE);
-		// System.out.println(e.getSource());{
-
+		
 		for (int i = 6; i > 0; i--) {
 			for (int j = 1; j <= 6; j++) {
 
@@ -264,13 +261,11 @@ public class Board implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		
 
 	}
 	
@@ -282,7 +277,6 @@ public class Board implements MouseListener{
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 

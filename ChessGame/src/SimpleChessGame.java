@@ -27,7 +27,6 @@ public class SimpleChessGame implements ActionListener{
 		
 		name.setBounds(25,10,200,40);
 		pass.setBounds(25,60,200,40);
-		//pass.setEchoChar((char) 0);
 		pass.addActionListener(this);
 		JButton loginButton=new JButton("Login");
 		loginButton.setActionCommand("Login");
@@ -51,18 +50,7 @@ public class SimpleChessGame implements ActionListener{
 		players.add(new Player("P1","chess"));
 		players.add(new Player("P2","ness"));
 		pass.addActionListener(this);
-//		
-//		
-//		//delete this after finishing board
-//		p1=players.get(0);
-//		p1.setColor(Color.WHITE);
-//		p2=players.get(1);
-//		p2.setColor(Color.BLACK);
-//		maxTurns=4;
-//		
-//		Board=new Board(this);
-//		endTurn();
-		
+
 
 	}
 	public Player getCurrentPlayer() {
@@ -125,7 +113,6 @@ public class SimpleChessGame implements ActionListener{
 		return false;
 	}
 	public Player getPlayer(String name) {
-		//name=name.toLowerCase();
 		for(int i=0;i<players.size();i++) {
 			if(players.get(i).getId().equals(name)) return players.get(i);
 		}
@@ -139,7 +126,6 @@ public class SimpleChessGame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Login")) {
 			
-			//try {
 			if(checkPlayer(name.getText())) {
 
 				if(getPlayer(name.getText()).checkPass(pass.getText().toString())) {
