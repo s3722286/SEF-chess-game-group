@@ -1,48 +1,29 @@
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Scanner;
-
 public class Player {
 	private String id;
 	private String pw;
 	private Color color;
 	private int point;
-	private Collection<Player> players = new ArrayList<Player>();
-	private Scanner in = new Scanner(System.in);
 
-	public Player(String id, String pw, Color color, int point) {
+	public Player(String id, String pw) {
 		this.id = id;
 		this.pw = pw;
-		this.color = color;
-		this.point = point;
+		this.color = null;
+		this.point = 0;
 	}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
-	public void logID() {
-		System.out.println("Enter player id: ");
-		while (in.hasNext()) {
-			setId(id);
-		}
-
-	}
-	public void logPassword() {
-		System.out.println("Enter player password: ");
-		while (in.hasNext()) {
-			setPw(id);
-		}
-
-	}
 
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getPw() {
-		return pw;
+	public boolean checkPass(String pass) {
+		if(pass.equals(this.pw)) {
+			return true;
+		}else return false;
 	}
 
 	public void setPw(String pw) {
@@ -65,8 +46,6 @@ public class Player {
 		this.point = point;
 	}
 
-	public void register(Player player) {
-		players.add(player);
-	}
+	
 
 }
