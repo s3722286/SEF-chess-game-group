@@ -15,6 +15,7 @@ public class SimpleChessGame implements ActionListener{
 	private Player p2=null;
 	private Board Board;
 	
+	private int turn=0;
 	private int p1Turns=0;
 	private int p2Turns=0;
 	private int maxTurns;
@@ -42,6 +43,7 @@ public class SimpleChessGame implements ActionListener{
 		f.add(pass);
 		f.setSize(275,250);
 		f.setLayout(null);
+		f.setLocationRelativeTo(null);
 		f.setVisible(true);
 		f.setTitle("Login To Simple Chessgame");
 		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -49,15 +51,67 @@ public class SimpleChessGame implements ActionListener{
 		players.add(new Player("P1","chess"));
 		players.add(new Player("P2","ness"));
 		pass.addActionListener(this);
-		
-		
-		//delete this after finishing board
-		maxTurns=15;
-		Board=new Board();
-		Board.draw();
+//		
+//		
+//		//delete this after finishing board
+//		p1=players.get(0);
+//		p1.setColor(Color.WHITE);
+//		p2=players.get(1);
+//		p2.setColor(Color.BLACK);
+//		maxTurns=4;
+//		
+//		Board=new Board(this);
+//		endTurn();
 		
 
 	}
+	public Player getCurrentPlayer() {
+		if((turn & 1) == 1) {
+			return p1;
+		} else return p2;
+	}
+	
+	public void endTurn() {
+		turn=turn+1;
+		if(turn>maxTurns) {
+			endGame();
+		}
+		if(Board.hasPieces(Color.WHITE)&&Board.hasPieces(Color.BLACK)) {
+		}else {
+			endGame();
+		}
+		Board.getBoardFrame().setTitle("Turn= "+turn+" Current player is "+getCurrentPlayer().getId()+"("+getCurrentPlayer().getColor()+")  Playing for a maximum of "+maxTurns+" turns.");
+	}
+	public void endGame() { // we're out of the end game now. Ends the game and displays result.
+		Player winner=null;
+		Player looser=null;
+		if(Board.hasPieces(Color.WHITE)&&Board.hasPieces(Color.BLACK)) {
+		if(p1.getPoint()==p2.getPoint()) {
+			JOptionPane.showMessageDialog(Board.getBoardFrame(),"The Game Has Ended in a tie. Both "+p1.getId()+" and "+p1.getId()+" got "+p1.getPoint()+" Points");
+		}else if(p1.getPoint()>p2.getPoint()) {
+			winner=p1;
+			looser=p2;
+		} else {
+			winner=p2;
+			looser=p1;
+		}
+		}else {
+			if(Board.hasPieces(Color.WHITE)) {
+				winner=p1;
+				looser=p2;
+			}else {
+				winner=p2;
+				looser=p1;
+			}
+		}
+		
+		if(winner!=null&&looser!=null) {
+		JOptionPane.showMessageDialog(Board.getBoardFrame(),""+winner.getId()+" Won the game with "+winner.getPoint()+" Points.  "+looser.getId()+" lost with "+looser.getPoint()+" Points.");
+		}
+		f.dispose();
+		Board.getBoardFrame().dispose();
+	}
+		
 	
 	public boolean checkPlayer(String name) {
 		for(int i=0;i<players.size();i++) {
@@ -99,20 +153,18 @@ public class SimpleChessGame implements ActionListener{
 						}
 						JOptionPane.showMessageDialog(f,"Welcome "+name.getText()+". You are now logged and ready to play.");
 					} else if(p2==null) {
-						p1=this.getPlayer(name.getText());
-						p1.setColor(Color.BLACK);
+						p2=this.getPlayer(name.getText());
+						p2.setColor(Color.BLACK);
 						
 						while(p2Turns<=0) {
 							p2Turns=Integer.parseInt(JOptionPane.showInputDialog("Enter the maximum amount of turns you wish to play for"));
 						}
 						JOptionPane.showMessageDialog(f,"Welcome "+name.getText()+". You are now logged and ready to play.");
 					   maxTurns=(p1Turns+p2Turns)/2;
-					   System.out.println(p1Turns);
-					   System.out.println(p2Turns);
-					   System.out.println(maxTurns);
 					   f.setVisible(false);
-						Board=new Board();
+						Board=new Board(this);
 						Board.draw();
+						endTurn();
 					}
 					
 				} else JOptionPane.showMessageDialog(f,"Error: Incorrect Password");
@@ -143,106 +195,19 @@ public class SimpleChessGame implements ActionListener{
 			String regPass=JOptionPane.showInputDialog("Enter a strong Password");
 			
 			players.add(new Player(regName,regPass));
-			//input = scanner.nextLine();
-			//pass3 = input;
+
 			
 		}
 		
 		
 		
-//		}
-//		catch(NullPointerException e1) {
-//			JOptionPane.showMessageDialog(f,"Error: Please enter both your name and password");
-//			//System.out.println("Error: Please enter both your name and password");
-//			e1.printStackTrace();
+
 		
 		
 		
 	}
 	
-	//WRONG
-//
-//	@Override
-//	public void insertUpdate(DocumentEvent e) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void removeUpdate(DocumentEvent e) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void changedUpdate(DocumentEvent e) {
-//		pass.setEchoChar('*');
-//		
-//	}
-		
-		/*Dmitris code:
-		import java.util.Scanner;
 
-		public class LoginLoops {
-			public static void main(String[] args) {
-
-				// Initialize
-				Scanner scanner = new Scanner(System.in);
-				String user1 = "username1";
-				String pass1 = "123";
-				int navigationInput = 0;
-				String input = "";
-				int state = 0;
-
-				String user2 = "username2";
-				String pass2 = "abc";
-
-				String user3 = null;
-				String pass3 = null;
-
-				// Loops
-				while (state == 0) {
-					System.out.println("Choose one:\n1. Login\n2. Register.");
-					navigationInput = scanner.nextInt();
-					scanner.nextLine();
-					state = navigationInput;
-					System.out.println();
-
-					while (state == 1) { // Login
-						System.out.println("Enter username:");
-						input = scanner.next();
-						System.out.println();
-						while (input.equals(user1) || input.equals(user2)) {
-							System.out.println("Enter password:");
-							scanner.nextLine();
-							input = scanner.nextLine();
-							System.out.println();
-							while (input.equals(pass1) || input.equals(pass2)) {
-								System.out.println("Login successful.");
-								state = 3;
-								input = "";
-							}
-						}
-					}
-					while (state == 2) { // Register
-						System.out.println("Pick a username:\n");
-						input = scanner.next();
-						scanner.nextLine();
-
-						user3 = input;
-
-						System.out.println("Pick a password:\n");
-						input = scanner.nextLine();
-						pass3 = input;
-
-						state = 0;
-
-					}
-				}
-				System.out.println("You can play the game!");
-			}
-		}
-		*/
 
 }
 
