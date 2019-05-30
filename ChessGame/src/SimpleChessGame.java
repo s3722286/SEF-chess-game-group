@@ -153,8 +153,10 @@ public class SimpleChessGame implements ActionListener{
 						}
 						JOptionPane.showMessageDialog(f,"Welcome "+name.getText()+". You are now logged and ready to play.");
 					} else if(p2==null) {
+						if(this.getPlayer(name.getText()).equals(p1.getId())) {// checks if player 2 is not the same as player 1
 						p2=this.getPlayer(name.getText());
 						p2.setColor(Color.BLACK);
+						
 						
 						while(p2Turns<=0) {
 							p2Turns=Integer.parseInt(JOptionPane.showInputDialog("Enter the maximum amount of turns you wish to play for"));
@@ -165,6 +167,7 @@ public class SimpleChessGame implements ActionListener{
 						Board=new Board(this);
 						Board.draw();
 						endTurn();
+						}else JOptionPane.showMessageDialog(f,"Error: You cannot login twice into the same game");
 					}
 					
 				} else JOptionPane.showMessageDialog(f,"Error: Incorrect Password");
